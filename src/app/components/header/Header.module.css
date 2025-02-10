@@ -1,0 +1,143 @@
+.header {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 6.904rem;
+    padding: 0 10.25vw;
+    z-index: 10;
+    position: sticky;
+    top: 0;
+    transition: all 0.5s;
+}
+
+.headerContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+/* Logo Container */
+.logoContainer {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.5rem 0.3rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.4rem;
+    background: var(--card-1-background);
+    transition: all 0.5s;
+}
+
+.logoContainer:hover {
+    width: 9rem;
+    /* padding: 0 3rem; */
+}
+
+.logoImage {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2rem;
+    transition: all 0.7s;
+    filter: grayscale(100%);
+    cursor: pointer;
+}
+
+.logoContainer:hover .logoImage {
+    margin-right: 1rem;
+    filter: grayscale(0%);
+}
+
+.logoText {
+    display: none;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.4s;
+    white-space: nowrap;
+}
+
+.logoContainer:hover .logoText {
+    display: inline;
+    color: var(--skyblue);
+}
+
+/* Message Icon */
+.messageContainer {
+    background: #1d1d1d;
+    border-radius: 0 0 0.5rem 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    width: 3.756rem;
+    height: 100%;
+    padding-bottom: 0.5rem;
+    box-shadow: 0 0 #0000, 0 0.1px 0.2px #0000001a, 0 0.9px 1.9px #0000001d, 0 5.1px 10.9px #00000020;
+}
+
+.messageIcon {
+    border: 1px solid white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.messageIcon:hover {
+    transform: scale(1.05);
+    margin-top: 0.25rem;
+    border-color: var(--skyblue);
+}
+
+.icon {
+    stroke: white;
+    fill: white;
+    transition: all 0.3s;
+}
+
+.messageIcon:hover svg {
+    stroke: var(--skyblue);
+    fill: var(--skyblue);
+    transform: scale(1.05);
+}
+
+/* 🚀 Mobile-Specific Styles */
+@media (max-width: 600px) {
+    .header {
+        height: 14.33vw;
+        padding: 0 4.80vw;
+    }
+
+    .logoContainer {
+        margin-top: 2vw;
+        width: 10vw;
+        height: 10vw;
+        padding: 1.5vw;
+    }
+
+    .logoContainer:hover {
+        width: 32.33vw;
+    }
+
+    .logoImage {
+        width: 7vw;
+        height: 7vw;
+        border-radius: 8.5vw;
+    }
+
+    .messageContainer {
+        height: 90%;
+        width: 10vw;
+        height: 15vw;
+    }
+
+    .messageIcon {
+        padding: 1.07vw;
+    }
+
+    .icon {
+        width: 6vw;
+        height: 6vw;
+    }
+}

@@ -1,0 +1,87 @@
+.heroSection {
+    position: relative;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 10.25vw;
+    color: white;
+    margin-bottom: 4.23vw;
+    cursor: pointer;
+}
+
+.heroContainer {
+    position: relative;
+    width: 100%;
+    background: var(--card-2-background);
+    height: 19.05vw;
+    border-bottom-left-radius: 1.98vw;
+    border-bottom-right-radius: 1.98vw;
+    scale: 1;
+    transition: scale .4s ease;
+}
+
+.heroContainer:hover {
+    scale: 1.03;
+    transition: scale .4s ease;
+}
+
+
+.heroTitle {
+    position: absolute !important;
+    bottom: -4.5vw !important;
+    white-space: nowrap;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8.8vw !important;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1;
+    text-align: center;
+}
+
+.heroButton {
+    position: absolute;
+    bottom: -7.8vw;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.11vw 1.27vw;
+    font-size: 1.16vw;
+    border: 1px solid var(--font-color-desc-1);
+    border-radius: 999px;
+    color: var(--font-color-desc-1);
+    transition: all 0.075s ease-in-out;
+}
+
+.heroButton:hover {
+    border-color: var(--skyblue);
+    color: var(--skyblue);
+}
+
+@media only screen and (max-width: 600px) {
+    .heroSection {
+        height: 50vh;
+        padding: 0 5.33vw;
+        justify-content: flex-start;
+    }
+
+    .heroContainer {
+        height: 46.93vw;
+        position: relative;
+        top: 25vw;
+        border-bottom-left-radius: 5.33vw;
+        border-bottom-right-radius: 5.33vw;
+    }
+
+    .heroTitle {
+        font-size: 10vw !important;
+        bottom: -5vw;
+    }
+
+    .heroButton{
+        bottom: -20vw;
+        font-size: 4.69vw;
+        width: max-content;
+    }
+}
