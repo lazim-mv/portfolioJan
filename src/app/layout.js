@@ -75,6 +75,7 @@ export default function RootLayout({ children }) {
       </head>
       <body
         className={`antialiased`}
+        id="main-content"
         style={{ fontFamily: "var(--font-boring-sans)" }}
       >
         {children}

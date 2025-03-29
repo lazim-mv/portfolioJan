@@ -19,6 +19,7 @@ const Footer = () => {
             role="contentinfo"
             aria-label="Contact section"
             tabIndex={0}
+            id='contact'
         >
             <div 
                 className={styles.heroContainer}
