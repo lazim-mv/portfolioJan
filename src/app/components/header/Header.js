@@ -37,11 +37,18 @@ const Header = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
 
+    const scrollToHome = () => {
+        const homeSection = document.getElementById('home');
+        if (homeSection) {
+            homeSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <div ref={headerRef} className={styles.header}>
             <div className={styles.headerContainer}>
 
-                <div ref={logoRef} className={styles.logoContainer}>
+                <div ref={logoRef} className={styles.logoContainer} onClick={scrollToHome}>
                     <Image src={logo} alt="logo of lazim mv" className={styles.logoImage} />
                     <a className={styles.logoText}>Lazim mv</a>
                 </div>
