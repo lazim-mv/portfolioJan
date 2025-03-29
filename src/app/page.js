@@ -1,5 +1,4 @@
 "use client"
-import Image from "next/image";
 import Header from "./components/header/Header";
 import Hero from "./components/hero/Hero";
 import About from "./components/about/About";
@@ -8,12 +7,28 @@ import Footer from "./components/footer/Footer";
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="min-h-screen bg-background" role="document">
+      <nav className="sr-only focus-within:not-sr-only" aria-label="Skip links">
+        <a href="#main-content" className="fixed top-0 left-0 p-2 bg-black text-white focus:outline-none focus:ring-2 focus:ring-white">
+          Skip to main content
+        </a>
+        <a href="#about" className="fixed top-0 left-0 p-2 bg-black text-white focus:outline-none focus:ring-2 focus:ring-white">
+          Skip to about section
+        </a>
+        <a href="#projects" className="fixed top-0 left-0 p-2 bg-black text-white focus:outline-none focus:ring-2 focus:ring-white">
+          Skip to projects section
+        </a>
+        <a href="#contact" className="fixed top-0 left-0 p-2 bg-black text-white focus:outline-none focus:ring-2 focus:ring-white">
+          Skip to contact section
+        </a>
+      </nav>
       <Header />
-      <Hero />
-      <About />
-      <Projects />
-      <Footer />
+      <main id="main-content" tabIndex="-1">
+        <Hero />
+        <About />
+        <Projects />
+        <Footer />
+      </main>
     </div>
   );
 }

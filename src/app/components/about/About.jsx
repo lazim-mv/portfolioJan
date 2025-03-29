@@ -20,7 +20,6 @@ const About = () => {
         const cards = cardsRef.current.children;
         const workWithChars = workWithTextRef.current.children;
 
-        // Main container scroll-based opacity
         gsap.fromTo(
             container,
             { opacity: .5 },
@@ -36,7 +35,6 @@ const About = () => {
             }
         );
 
-        // Text color change animation
         gsap.fromTo(
             [introTextRef.current, descriptionTextRef.current],
             {
@@ -54,7 +52,6 @@ const About = () => {
             }
         );
 
-        // Work with text animation
         gsap.fromTo(
             workWithChars,
             {
@@ -75,7 +72,6 @@ const About = () => {
             }
         );
 
-        // Previous animations remain the same...
         gsap.fromTo(
             introChars,
             {
@@ -154,17 +150,33 @@ const About = () => {
         "based in India."
     ];
 
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            e.target.click();
+        }
+    };
+
     return (
-        <div ref={containerRef} style={{ opacity: 1 }} id="about">
-            <div className={styles.aboutContainer}>
-                <h2 ref={introTextRef} className={styles.multilineText}>
+        <section 
+            ref={containerRef} 
+            id="about"
+            style={{ opacity: 1 }}
+            aria-label="About section"
+        >
+            <div className={styles.aboutContainer} role="region" aria-label="Introduction">
+                <h2 ref={introTextRef} className={styles.multilineText} aria-label="Personal introduction">
                     {introLines.map((line, i) => (
                         <div key={i} className={styles.textLine}>
                             {splitTextPreservingSpaces(line)}
                         </div>
                     ))}
                 </h2>
-                <p ref={descriptionTextRef} className={styles.multilineText}>
+                <p 
+                    ref={descriptionTextRef} 
+                    className={styles.multilineText}
+                    aria-label="Professional experience"
+                >
                     Software developer with 2.5 years of,
                     experience in frontend and mobile app,
                     development. Skilled in Next.js, React.js,,
@@ -172,20 +184,36 @@ const About = () => {
                     high-quality, maintainable code.
                 </p>
             </div>
-            <div className={styles.aboutSecondContainer}>
-                <h2 ref={workWithTextRef}>
+            <div 
+                className={styles.aboutSecondContainer}
+                role="region"
+                aria-label="Work preferences"
+            >
+                <h2 ref={workWithTextRef} aria-label="Client types I work with">
                     {splitTextPreservingSpaces("I often work with:")}
                 </h2>
-                <div className={styles.cards} ref={cardsRef}>
+                <div 
+                    className={styles.cards} 
+                    ref={cardsRef}
+                    role="list"
+                    aria-label="Types of clients"
+                >
                     {["Startups", "Marketing teams", "Agencies", "B2B SaaS"].map((text, i) => (
-                        <div key={i} className={styles.card}>
-                            <SquareArrowDownRight className={styles.icon} strokeWidth={0.75} />
+                        <div 
+                            key={i} 
+                            className={styles.card}
+                            role="listitem"
+                            tabIndex={0}
+                            onKeyDown={handleKeyPress}
+                            aria-label={text}
+                        >
+                            <SquareArrowDownRight className={styles.icon} strokeWidth={0.75} aria-hidden="true" />
                             <p>{text}</p>
                         </div>
                     ))}
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

@@ -26,22 +26,7 @@ const Hero = () => {
         );
     }, []);
 
-
     useEffect(() => {
-        // Button hover effect
-        gsap.fromTo(
-            buttonRef.current,
-            { scale: 1 },
-            {
-                scale: 1.1,
-                repeat: -1,
-                yoyo: true,
-                duration: 0.8,
-                ease: "power1.inOut",
-            }
-        );
-
-        // Scroll indicator bounce animation
         gsap.to(scrollIndicatorRef.current, {
             y: 10,
             repeat: -1,
@@ -51,9 +36,20 @@ const Hero = () => {
         });
     }, []);
 
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            e.target.click();
+        }
+    };
+
     return (
-        <section className={styles.heroSection} id="home">
-            <div className={styles.heroContainer}>
+        <section 
+            className={styles.heroSection} 
+            id="home"
+            aria-label="Hero section"
+        >
+            <div className={styles.heroContainer} role="region" aria-label="Hero content">
                 <div className={styles.heroImageWrapper}>
                     <Image
                         src={hero}
@@ -67,12 +63,16 @@ const Hero = () => {
                 </div>
                 <TitleAnimation text="Lazim Latheef" className={styles.heroTitle} start="top 90%" />
 
-                <p className={styles.heroDescription}>
+                <p className={styles.heroDescription} aria-label="Role description">
                     Software Developer / Fullstack
                 </p>
 
-                <button className={styles.heroButton}
+                <button 
+                    className={styles.heroButton}
                     onClick={() => window.open(getWhatsAppLink(), "_blank")}
+                    onKeyDown={handleKeyPress}
+                    ref={buttonRef}
+                    aria-label="Contact via WhatsApp"
                 >
                     Get in touch →
                 </button>
@@ -81,8 +81,13 @@ const Hero = () => {
             <div
                 className={styles.indicatorContainer}
                 onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+                onKeyDown={handleKeyPress}
+                role="button"
+                tabIndex={0}
+                ref={scrollIndicatorRef}
+                aria-label="Scroll to about section"
             >
-                <div className={styles.indicator}>
+                <div className={styles.indicator} aria-hidden="true">
                     <div className={styles.dot}></div>
                 </div>
             </div>

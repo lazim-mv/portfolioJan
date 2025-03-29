@@ -60,9 +60,9 @@ const Projects = () => {
         if (title) {
             const text = title.textContent;
             title.innerHTML = `
-                <div class="${styles.titleWrapper}">
+                <div class="${styles.titleWrapper}" role="heading" aria-level="1">
                     <span class="${styles.textBase}">${text}</span>
-                    <span class="${styles.textFill}">${text}</span>
+                    <span class="${styles.textFill}" aria-hidden="true">${text}</span>
                 </div>
             `;
 
@@ -86,7 +86,6 @@ const Projects = () => {
     }, [])
 
     useEffect(() => {
-
         if (iframeLink) {
             gsap.fromTo(
                 `.${styles.iframeView}`,
@@ -96,53 +95,83 @@ const Projects = () => {
         }
     }, [iframeLink]);
 
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            e.target.click();
+        }
+    };
+
     return (
-        <div className={styles.container}>
-            {/* <h1 className={styles.title} ref={titleRef}>Latest Work</h1> */}
+        <section className={styles.container} aria-label="Latest Projects">
             <TitleAnimation text="Latest Work" className={styles.title} />
-            <div className={styles.cards}>
+            <div className={styles.cards} role="list">
                 {data.map((project, index) => (
-                    <div
+                    <article
                         key={index}
                         className={styles.card}
+                        role="listitem"
                     >
                         <div className={styles.cardHeading}>
                             <AnimatedText text={project.name} />
                             {project.link && (
-                                <div onClick={() => project.link && setIframeLink(project.link)} style={{ cursor: "pointer" }}>
-                                    <SquareArrowDownRight className={styles.icon} strokeWidth={0.75} />
-                                </div>
+                                <button
+                                    onClick={() => project.link && setIframeLink(project.link)}
+                                    onKeyDown={handleKeyPress}
+                                    className={styles.previewButton}
+                                    aria-label={`Preview ${project.name} website`}
+                                >
+                                    <SquareArrowDownRight className={styles.icon} strokeWidth={0.75} aria-hidden="true" />
+                                </button>
                             )}
                         </div>
                         <Image
                             src={project.img}
-                            alt={`Image of ${project.name} company website`}
+                            alt={`Screenshot of ${project.name} website`}
                             width={400}
                             height={300}
                             className={styles.projectImage}
                         />
-                    </div>
+                    </article>
                 ))}
             </div>
 
             {iframeLink && (
-                <div className={styles.iframeView}>
+                <div 
+                    className={styles.iframeView}
+                    role="dialog"
+                    aria-label="Website Preview"
+                >
                     <div className={styles.iframeViewWrap}>
                         <div className={styles.iframeHeader}>
-                            <div className={styles.iconContainer} onClick={() => setIframeLink("")}>
-                                <X className={styles.closeIcon} color="white" />
-                            </div>
-                            <a href={iframeLink} target="_blank">
-                                <div className={styles.iconContainer}>
-                                    <Eye className={styles.viewIcon} color="white" />
-                                </div>
+                            <button
+                                className={styles.iconContainer}
+                                onClick={() => setIframeLink("")}
+                                onKeyDown={handleKeyPress}
+                                aria-label="Close preview"
+                            >
+                                <X className={styles.closeIcon} color="white" aria-hidden="true" />
+                            </button>
+                            <a 
+                                href={iframeLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.iconContainer}
+                                aria-label="Open website in new tab"
+                            >
+                                <Eye className={styles.viewIcon} color="white" aria-hidden="true" />
                             </a>
                         </div>
-                        <iframe src={iframeLink} frameBorder="0" className={styles.iframe}></iframe>
+                        <iframe 
+                            src={iframeLink} 
+                            frameBorder="0" 
+                            className={styles.iframe}
+                            title="Website Preview"
+                        ></iframe>
                     </div>
                 </div>
             )}
-        </div>
+        </section>
     );
 };
 

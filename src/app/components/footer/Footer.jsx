@@ -4,18 +4,39 @@ import TitleAnimation from '../animations/TitleAnimations'
 import { getWhatsAppLink } from '@/app/utils/whatsappLink'
 
 const Footer = () => {
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            e.target.click();
+        }
+    };
+
     return (
-        <section className={styles.heroSection}
+        <section 
+            className={styles.heroSection}
             onClick={() => window.open(getWhatsAppLink(), "_blank")}
+            onKeyDown={handleKeyPress}
+            role="contentinfo"
+            aria-label="Contact section"
+            tabIndex={0}
         >
-            <div className={styles.heroContainer}>
+            <div 
+                className={styles.heroContainer}
+                role="region"
+                aria-label="Contact information"
+            >
+                <TitleAnimation 
+                    text="Get in Touch" 
+                    className={styles.heroTitle} 
+                    start="bottom 10%" 
+                    aria-label="Contact heading"
+                />
 
-                <TitleAnimation text="Get in Touch" className={styles.heroTitle} start="bottom 10%" />
-
-
-
-                <button className={styles.heroButton}
+                <button 
+                    className={styles.heroButton}
                     onClick={() => window.open(getWhatsAppLink(), "_blank")}
+                    onKeyDown={handleKeyPress}
+                    aria-label="Open WhatsApp chat"
                 >
                     Get in touch →
                 </button>

@@ -4,7 +4,7 @@ import gsap from "gsap";
 import Image from "next/image";
 import logo from "../../../../public/header/headerLogo1.png";
 import { MessageSquare } from "lucide-react";
-import styles from "./Header.module.css"; // Import the CSS module
+import styles from "./Header.module.css";
 import { BsChatRightText } from "react-icons/bs";
 import { getWhatsAppLink } from "@/app/utils/whatsappLink";
 
@@ -44,27 +44,44 @@ const Header = () => {
         }
     };
 
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            e.target.click();
+        }
+    };
+
     return (
-        <div ref={headerRef} className={styles.header}>
-            <div className={styles.headerContainer}>
-
-                <div ref={logoRef} className={styles.logoContainer} onClick={scrollToHome}>
-                    <Image src={logo} alt="logo of lazim mv" className={styles.logoImage} />
-                    <a className={styles.logoText}>Lazim mv</a>
+        <header ref={headerRef} className={styles.header} role="banner">
+            <nav className={styles.headerContainer} aria-label="Main navigation">
+                <div
+                    ref={logoRef}
+                    className={styles.logoContainer}
+                    onClick={scrollToHome}
+                    onKeyDown={handleKeyPress}
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Go to home section"
+                >
+                    <Image src={logo} alt="Lazim MV logo" className={styles.logoImage} />
+                    <span className={styles.logoText}>Lazim mv</span>
                 </div>
-
 
                 <div
                     ref={messageRef}
                     className={styles.messageContainer}
                     onClick={() => window.open(getWhatsAppLink(), "_blank")}
+                    onKeyDown={handleKeyPress}
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Open WhatsApp chat"
                 >
                     <div className={styles.messageIcon}>
-                        <MessageSquare size={17} className={styles.icon} />
+                        <MessageSquare size={17} className={styles.icon} aria-hidden="true" />
                     </div>
                 </div>
-            </div>
-        </div>
+            </nav>
+        </header>
     );
 };
 
