@@ -29,6 +29,26 @@ const Projects = () => {
             img: "/projects/pullysons.gif",
         },
         {
+            name: "Car & Bikes",
+            link: "https://adminautosports.vercel.app/bikes",
+            img: "/projects/autosportsdash.jpg",
+        },
+        {
+            name: "Motobike",
+            link: "https://client-bikes.vercel.app/",
+            img: "/projects/motobike.gif",
+        },
+        {
+            name: "AutoTraders",
+            link: "https://cars-client-iota.vercel.app/",
+            img: "/projects/autotraders.gif",
+        },
+        {
+            name: "Mavrriq",
+            link: "https://www.mavrriq.com/",
+            img: "/projects/Maveriq.gif",
+        },
+        {
             name: "Pullys",
             link: "https://www.pullysons.com/",
             img: "/projects/pullysons.gif",
@@ -70,7 +90,7 @@ const Projects = () => {
         if (iframeLink) {
             gsap.fromTo(
                 `.${styles.iframeView}`,
-                { x: "-50%", y: "100%" },
+                {  y: "100%" },
                 { y: "0%", duration: 1, ease: "power3.out" }
             );
         }

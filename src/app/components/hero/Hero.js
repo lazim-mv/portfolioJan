@@ -62,6 +62,7 @@ const Hero = () => {
                         height={500}
                         priority
                         className={styles.heroImage}
+                        style={{ display: "none" }}
                     />
                 </div>
                 <TitleAnimation text="Lazim Latheef" className={styles.heroTitle} start="top 90%" />
@@ -81,7 +82,7 @@ const Hero = () => {
                 className={styles.indicatorContainer}
                 onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
             >
-                <div  className={styles.indicator}>
+                <div className={styles.indicator}>
                     <div className={styles.dot}></div>
                 </div>
             </div>

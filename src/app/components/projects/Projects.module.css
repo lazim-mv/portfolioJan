@@ -212,6 +212,20 @@
         align-items: center;
     }
 
+    .iconContainer {
+        width: 10.96825vw;
+        height: 10.96825vw;
+    }
+
+
+    .iconContainer:first-child {
+        right: 2vw;
+    }
+
+    .iconContainer:last-child {
+        right: 15vw;
+    }
+
     .icon {
         width: 9vw;
         height: 9vw;
