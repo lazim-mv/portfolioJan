@@ -12,6 +12,8 @@ gsap.registerPlugin(ScrollTrigger);
 const Projects = () => {
     const [iframeLink, setIframeLink] = useState("");
     const titleRef = useRef(null);
+    const dialogRef = useRef(null);
+    const previousFocusRef = useRef(null);
 
     const data = [
         {
@@ -83,15 +85,65 @@ const Projects = () => {
                 }
             );
         }
-    }, [])
+    }, []);
 
     useEffect(() => {
         if (iframeLink) {
+            previousFocusRef.current = document.activeElement;
+
             gsap.fromTo(
                 `.${styles.iframeView}`,
-                {  y: "100%" },
-                { y: "0%", duration: 1, ease: "power3.out" }
+                { y: "100%" },
+                { 
+                    y: "0%", 
+                    duration: 1, 
+                    ease: "power3.out",
+                    onComplete: () => {
+                        const closeButton = dialogRef.current?.querySelector('button');
+                        closeButton?.focus();
+                    }
+                }
             );
+
+            const handleTabKey = (e) => {
+                if (!dialogRef.current) return;
+                
+                const focusableElements = dialogRef.current.querySelectorAll(
+                    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                );
+                const firstFocusable = focusableElements[0];
+                const lastFocusable = focusableElements[focusableElements.length - 1];
+
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstFocusable) {
+                            e.preventDefault();
+                            lastFocusable.focus();
+                        }
+                    } else {
+                        if (document.activeElement === lastFocusable) {
+                            e.preventDefault();
+                            firstFocusable.focus();
+                        }
+                    }
+                }
+            };
+
+            const handleEscape = (e) => {
+                if (e.key === 'Escape') {
+                    setIframeLink("");
+                }
+            };
+
+            document.addEventListener('keydown', handleTabKey);
+            document.addEventListener('keydown', handleEscape);
+
+            return () => {
+                document.removeEventListener('keydown', handleTabKey);
+                document.removeEventListener('keydown', handleEscape);
+            };
+        } else {
+            previousFocusRef.current?.focus();
         }
     }, [iframeLink]);
 
@@ -103,7 +155,7 @@ const Projects = () => {
     };
 
     return (
-        <section className={styles.container} aria-label="Latest Projects">
+        <section className={styles.container} id="projects" aria-label="Latest Projects">
             <TitleAnimation text="Latest Work" className={styles.title} />
             <div className={styles.cards} role="list">
                 {data.map((project, index) => (
@@ -138,12 +190,21 @@ const Projects = () => {
 
             {iframeLink && (
                 <div 
+                    ref={dialogRef}
                     className={styles.iframeView}
                     role="dialog"
+                    aria-modal="true"
                     aria-label="Website Preview"
                 >
-                    <div className={styles.iframeViewWrap}>
-                        <div className={styles.iframeHeader}>
+                    <div 
+                        className={styles.iframeViewWrap}
+                        aria-label="Preview content"
+                    >
+                        <div 
+                            className={styles.iframeHeader}
+                            role="toolbar"
+                            aria-label="Preview controls"
+                        >
                             <button
                                 className={styles.iconContainer}
                                 onClick={() => setIframeLink("")}
@@ -167,6 +228,8 @@ const Projects = () => {
                             frameBorder="0" 
                             className={styles.iframe}
                             title="Website Preview"
+                            aria-label={`Preview of website in iframe`}
+                            loading="lazy"
                         ></iframe>
                     </div>
                 </div>
