@@ -48,6 +48,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         {/* Preload the GA script */}
+        <meta
+          property="og:image"
+          content="https://lazimmv.vercel.app/openGraph.png"
+        />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1024" />
+        <meta property="og:image:height" content="1024" />
         <link
           rel="preload"
           href="https://www.googletagmanager.com/gtag/js?id=G-R945BBRD1B"
