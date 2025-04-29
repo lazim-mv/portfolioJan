@@ -14,7 +14,7 @@ export const metadata = {
     siteName: "Lazim MV Portfolio",
     images: [
       {
-        url: "https://lazimmv.vercel.app/favicon.png", // Add your OG image
+        url: "https://lazimmv.vercel.app/openGraph.png", // Add your OG image
         width: 1200,
         height: 630,
       }
