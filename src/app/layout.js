@@ -47,7 +47,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         {/* Preload the GA script */}
-       
+        <link
+          rel="preload"
+          href="https://www.googletagmanager.com/gtag/js?id=G-R945BBRD1B"
+          as="script"
+        />
 
         {/* Load GA directly in <head> */}
         <script
