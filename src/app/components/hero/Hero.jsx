@@ -99,7 +99,10 @@ const Hero = ({ isMobile, hasMounted }) => {
                  flex-col md:flex-row md:items-center'
                 >
                     <p className='text-medium'>I'll help you make a lasting impression online.</p>
-                    <Link href="/" className='relative group overflow-hidden'>
+                    <Link
+                        href="https://wa.me/918921076209?text=Hi%20Lazim!%20I%20just%20visited%20your%20website%20(https%3A%2F%2Flazim-mv.vercel.app%2F)%20and%20I'm%20interested%20in%20working%20with%20you%20on%20a%20project.%20Can%20we%20connect%3F"
+                        target="_blank"
+                        className='relative group overflow-hidden'>
                         <span>Start Project</span>
                         <span className="block absolute text-start top-full left-0 transition-transform duration-300 group-hover:translate-y-[-100%]">
                             Start Project

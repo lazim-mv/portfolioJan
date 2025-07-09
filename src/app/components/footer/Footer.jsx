@@ -79,7 +79,7 @@ const Footer = ({ isMobile, hasMounted }) => {
 
 
 
-    }, { scope: containerRef,dependencies:[hasMounted] })
+    }, { scope: containerRef, dependencies: [hasMounted] })
 
     if (!hasMounted) {
         return null
@@ -93,7 +93,8 @@ const Footer = ({ isMobile, hasMounted }) => {
                     <h2 className='text-black md:w-[50%] w-[100%] footerSubHeading'>Let's talk about your project – and make something really good out of it!</h2>
 
                     <Link
-                        href="#contact"
+                        href="https://wa.me/918921076209?text=Hi%20Lazim!%20I%20just%20visited%20your%20website%20(https%3A%2F%2Flazim-mv.vercel.app%2F)%20and%20I'm%20interested%20in%20working%20with%20you%20on%20a%20project.%20Can%20we%20connect%3F"
+                        target="_blank"
                         className="group relative w-max overflow-hidden md:rounded-[.4rem] 
                         rounded-[8px] md:py-[1.5rem] py-[22px] md:px-[3rem] px-[48px] bg-[#f6f6f6] h-max"
                     >

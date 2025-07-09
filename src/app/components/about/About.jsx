@@ -18,156 +18,156 @@ const About = ({ isMobile, hasMounted }) => {
         }
     }, [])
 
-    // useGSAP(() => {
-    //     const initAnimation = () => {
-    //         if (!hasMounted || !containerRef.current) return;
+    useGSAP(() => {
+        const initAnimation = () => {
+            if (!hasMounted || !containerRef.current) return;
 
-    //         const aboutHeading = containerRef.current.querySelector('.about-heading')
-    //         const descElement = containerRef.current.querySelector('.desc-wrapper')
-    //         const buttonElement = containerRef.current.querySelector('.button-wrapper')
+            const aboutHeading = containerRef.current.querySelector('.about-heading')
+            const descElement = containerRef.current.querySelector('.desc-wrapper')
+            const buttonElement = containerRef.current.querySelector('.button-wrapper')
 
-    //         if (!aboutHeading || !descElement || !buttonElement) return
+            if (!aboutHeading || !descElement || !buttonElement) return
 
-    //         // Clear any existing animations
-    //         gsap.killTweensOf([aboutHeading, descElement, buttonElement])
+            // Clear any existing animations
+            gsap.killTweensOf([aboutHeading, descElement, buttonElement])
 
-    //         // SplitText setup - only use on desktop to avoid mobile issues
-    //         let splitText;
-    //         const useSplitText = !isMobile && typeof SplitText !== 'undefined';
+            // SplitText setup - only use on desktop to avoid mobile issues
+            let splitText;
+            const useSplitText = !isMobile && typeof SplitText !== 'undefined';
 
-    //         if (useSplitText) {
-    //             try {
-    //                 splitText = new SplitText(aboutHeading, {
-    //                     type: "lines",
-    //                     linesClass: "split-line"
-    //                 })
+            if (useSplitText) {
+                try {
+                    splitText = new SplitText(aboutHeading, {
+                        type: "lines",
+                        linesClass: "split-line"
+                    })
 
-    //                 // Create overflow wrappers for each line
-    //                 if (splitText.lines && splitText.lines.length > 0) {
-    //                     splitText.lines.forEach(line => {
-    //                         const wrapper = document.createElement('div')
-    //                         wrapper.style.overflow = 'hidden'
-    //                         wrapper.style.lineHeight = '1.2'
-    //                         wrapper.style.display = 'block'
-    //                         line.parentNode.insertBefore(wrapper, line)
-    //                         wrapper.appendChild(line)
-    //                     })
+                    // Create overflow wrappers for each line
+                    if (splitText.lines && splitText.lines.length > 0) {
+                        splitText.lines.forEach(line => {
+                            const wrapper = document.createElement('div')
+                            wrapper.style.overflow = 'hidden'
+                            wrapper.style.lineHeight = '1.2'
+                            wrapper.style.display = 'block'
+                            line.parentNode.insertBefore(wrapper, line)
+                            wrapper.appendChild(line)
+                        })
 
-    //                     // Set initial states for SplitText lines
-    //                     gsap.set(splitText.lines, { y: '100%' })
-    //                 } else {
-    //                     // If SplitText didn't work properly, fall back to simple animation
-    //                     splitText = null;
-    //                 }
-    //             } catch (error) {
-    //                 console.warn('SplitText not available, using fallback animation')
-    //                 splitText = null
-    //             }
-    //         }
+                        // Set initial states for SplitText lines
+                        gsap.set(splitText.lines, { y: '100%' })
+                    } else {
+                        // If SplitText didn't work properly, fall back to simple animation
+                        splitText = null;
+                    }
+                } catch (error) {
+                    console.warn('SplitText not available, using fallback animation')
+                    splitText = null
+                }
+            }
 
-    //         // Set initial states for elements
-    //         gsap.set([descElement, buttonElement], {
-    //             opacity: 0,
-    //             y: 30
-    //         })
+            // Set initial states for elements
+            gsap.set([descElement, buttonElement], {
+                opacity: 0,
+                y: 30
+            })
 
-    //         // If not using SplitText or it failed, set fallback state for heading
-    //         if (!splitText) {
-    //             gsap.set(aboutHeading, {
-    //                 opacity: 0,
-    //                 y: 30
-    //             })
-    //         }
+            // If not using SplitText or it failed, set fallback state for heading
+            if (!splitText) {
+                gsap.set(aboutHeading, {
+                    opacity: 0,
+                    y: 30
+                })
+            }
 
-    //         // Create ScrollTrigger with mobile-friendly settings
-    //         const aboutTrigger = ScrollTrigger.create({
-    //             trigger: containerRef.current,
-    //             start: isMobile ? 'top 50%' : 'top 80%',
-    //             end: 'bottom 20%',
-    //             id: "about-component-trigger",
-    //             refreshPriority: 1,
-    //             onEnter: () => {
-    //                 // Create timeline when trigger enters
-    //                 const tl = gsap.timeline()
+            // Create ScrollTrigger with mobile-friendly settings
+            const aboutTrigger = ScrollTrigger.create({
+                trigger: containerRef.current,
+                start: isMobile ? 'top 50%' : 'top 80%',
+                end: 'bottom 20%',
+                id: "about-component-trigger",
+                refreshPriority: 1,
+                onEnter: () => {
+                    // Create timeline when trigger enters
+                    const tl = gsap.timeline()
 
-    //                 // Heading animation (SplitText or fallback)
-    //                 if (splitText && splitText.lines && splitText.lines.length > 0) {
-    //                     tl.to(splitText.lines, {
-    //                         y: '0%',
-    //                         duration: 0.8,
-    //                         stagger: 0.1,
-    //                         ease: 'power2.out'
-    //                     })
-    //                 } else {
-    //                     tl.to(aboutHeading, {
-    //                         opacity: 1,
-    //                         y: 0,
-    //                         duration: 0.8,
-    //                         ease: 'power2.out'
-    //                     })
-    //                 }
+                    // Heading animation (SplitText or fallback)
+                    if (splitText && splitText.lines && splitText.lines.length > 0) {
+                        tl.to(splitText.lines, {
+                            y: '0%',
+                            duration: 0.8,
+                            stagger: 0.1,
+                            ease: 'power2.out'
+                        })
+                    } else {
+                        tl.to(aboutHeading, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            ease: 'power2.out'
+                        })
+                    }
 
-    //                 // Description and button animations
-    //                 tl.to(descElement, {
-    //                     opacity: 1,
-    //                     y: 0,
-    //                     duration: 0.8,
-    //                     ease: 'power2.out'
-    //                 }, 0.2)
+                    // Description and button animations
+                    tl.to(descElement, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        ease: 'power2.out'
+                    }, 0.2)
 
-    //                 tl.to(buttonElement, {
-    //                     opacity: 1,
-    //                     y: 0,
-    //                     duration: 0.6,
-    //                     ease: 'power2.out'
-    //                 }, 0.4)
-    //             },
-    //             onLeaveBack: () => {
-    //                 // Reset elements when scrolling back up
-    //                 if (splitText && splitText.lines && splitText.lines.length > 0) {
-    //                     gsap.set(splitText.lines, { y: '100%' })
-    //                 } else {
-    //                     gsap.set(aboutHeading, {
-    //                         opacity: 0,
-    //                         y: 30
-    //                     })
-    //                 }
+                    tl.to(buttonElement, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        ease: 'power2.out'
+                    }, 0.4)
+                },
+                onLeaveBack: () => {
+                    // Reset elements when scrolling back up
+                    if (splitText && splitText.lines && splitText.lines.length > 0) {
+                        gsap.set(splitText.lines, { y: '100%' })
+                    } else {
+                        gsap.set(aboutHeading, {
+                            opacity: 0,
+                            y: 30
+                        })
+                    }
 
-    //                 gsap.set([descElement, buttonElement], {
-    //                     opacity: 0,
-    //                     y: 30
-    //                 })
-    //             }
-    //         })
+                    gsap.set([descElement, buttonElement], {
+                        opacity: 0,
+                        y: 30
+                    })
+                }
+            })
 
-    //         // Store references for cleanup
-    //         if (splitText) {
-    //             containerRef.current._splitText = splitText
-    //         }
+            // Store references for cleanup
+            if (splitText) {
+                containerRef.current._splitText = splitText
+            }
 
-    //         return aboutTrigger
-    //     }
+            return aboutTrigger
+        }
 
-    //     // Initialize animation after a short delay to ensure DOM is ready
-    //     const timer = setTimeout(() => {
-    //         const trigger = initAnimation()
-    //         if (trigger) {
-    //             containerRef.current._aboutTrigger = trigger
-    //         }
-    //     }, 150) // Slightly longer delay for mobile
+        // Initialize animation after a short delay to ensure DOM is ready
+        const timer = setTimeout(() => {
+            const trigger = initAnimation()
+            if (trigger) {
+                containerRef.current._aboutTrigger = trigger
+            }
+        }, 150) // Slightly longer delay for mobile
 
-    //     // Cleanup function
-    //     return () => {
-    //         clearTimeout(timer)
-    //         if (containerRef.current?._aboutTrigger) {
-    //             containerRef.current._aboutTrigger.kill()
-    //         }
-    //         if (containerRef.current?._splitText) {
-    //             containerRef.current._splitText.revert()
-    //         }
-    //     }
+        // Cleanup function
+        return () => {
+            clearTimeout(timer)
+            if (containerRef.current?._aboutTrigger) {
+                containerRef.current._aboutTrigger.kill()
+            }
+            if (containerRef.current?._splitText) {
+                containerRef.current._splitText.revert()
+            }
+        }
 
-    // }, { scope: containerRef, dependencies: [hasMounted, isMobile] }) 
+    }, { scope: containerRef, dependencies: [hasMounted, isMobile] }) 
 
     // Handle window resize to refresh ScrollTrigger
     useEffect(() => {
@@ -219,10 +219,12 @@ const About = ({ isMobile, hasMounted }) => {
                 </div>
 
                 <Link
-                    href="#contact"
+                    href="https://wa.me/918921076209?text=Hi%20Lazim!%20I%20just%20visited%20your%20website%20(https%3A%2F%2Flazim-mv.vercel.app%2F)%20and%20I'm%20interested%20in%20working%20with%20you%20on%20a%20project.%20Can%20we%20connect%3F"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="button-wrapper group relative w-max overflow-hidden 
-                    md:rounded-[.4rem] rounded-lg md:py-[1rem] md:px-[2.25rem] bg-[#f6f6f6]
-                    px-[32px] py-[16px]"
+    md:rounded-[.4rem] rounded-lg md:py-[1rem] md:px-[2.25rem] bg-[#f6f6f6]
+    px-[32px] py-[16px]"
                 >
                     <div className="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out z-0" />
                     <div className="relative z-10 flex flex-col items-center overflow-hidden text-black">
@@ -234,6 +236,8 @@ const About = ({ isMobile, hasMounted }) => {
                         </span>
                     </div>
                 </Link>
+
+
             </div>
         </div>
     )

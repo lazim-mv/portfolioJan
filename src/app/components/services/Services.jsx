@@ -212,7 +212,14 @@ const Services = ({ isMobile, hasMounted }) => {
                 }}
             ></div>
 
-            <section ref={section2Ref} className="bg-[#1a1a1a]" style={{ padding: "max(8rem, 96px) 5vw max(10rem, 96px)" }} id="projectSequence">
+            <section
+                ref={section2Ref}
+                id="projectSequence"
+                className="bg-[#1a1a1a]"
+                style={{
+                    padding: isMobile ? "96px 5vw 96px" : "max(8rem, 96px) 5vw max(10rem, 96px)",
+                }}
+            >
                 <h6 className='
                     flex items-center
                     text-white 
