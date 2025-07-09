@@ -1,16 +1,16 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react";
-import About from "./components/About/About";
-import Header from "./components/Header/Header";
-import Hero from "./components/Hero/Hero";
-import Projects from "./components/Projects/Projects";
-import Services from "./components/Services/Services";
-import Testimonials from "./components/Testimonials/Testimonials";
 import { useGSAP } from "@gsap/react";
-import Footer from "./components/Footer/Footer";
 import gsap from "./utils/gsapInit";
 import { useWindowWidth } from "@react-hook/window-size";
+import Header from "./components/Header/Header";
+import Hero from "./components/Hero/Hero";
+import About from "./components/About/About";
+import Projects from "./components/Projects/Projects";
+import Testimonials from "./components/Testimonials/Testimonials";
+import Services from "./components/Services/Services";
+import Footer from "./components/Footer/Footer";
 
 export default function Home() {
   const [hasMounted, setHasMounted] = useState(false);
@@ -154,7 +154,7 @@ export default function Home() {
   }, { scope: sectionRef, dependencies: [hasMounted, isMobile] });
 
 
- 
+
 
 
   if (!hasMounted) return null;
@@ -206,6 +206,9 @@ export default function Home() {
         className="bg-white"
         style={{
           padding: `max(${isMobile ? "2rem, 80px" : "8rem, 96px"}) 5vw max(${isMobile ? "5rem, 100px" : "10rem, 96px"})`,
+          willChange: 'opacity, transform',
+          opacity: 1,
+          transformStyle: 'preserve-3d',
         }}
       >
         <Testimonials isMobile={isMobile} hasMounted={hasMounted} />
