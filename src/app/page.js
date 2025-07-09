@@ -127,7 +127,6 @@ export default function Home() {
           fastScrollEnd: true,
           preventOverlaps: true,
           refreshPriority: 1,
-          // markers: true,
         },
       });
 
@@ -155,89 +154,9 @@ export default function Home() {
   }, { scope: sectionRef, dependencies: [hasMounted, isMobile] });
 
 
-  /*
-  useGSAP(() => {
-    if (!hasMounted || !sectionRef.current) return;
-  
-    const timeout = setTimeout(() => {
-      const hero = sectionRef.current?.querySelector("#hero");
-      const testi = sectionRef.current?.querySelector("#testimonials");
-      const footer = sectionRef.current?.querySelector("#footer");
-      const service = sectionRef.current?.querySelector("#servicesSection");
-  
-      if (!hero || !testi || !service || !footer) return;
-  
-      // HERO and TESTIMONIALS animations (same as above)
-      // ... (keep the same hero and testimonials code)
-  
-      // ULTRA SMOOTH FOOTER ANIMATION
-      
-      // Hardware acceleration setup
-      footer.style.willChange = 'transform, opacity';
-      footer.style.transformStyle = 'preserve-3d';
-      footer.style.backfaceVisibility = 'hidden';
-      
-      // Use requestAnimationFrame for smoother updates
-      let animationId;
-      let targetProgress = 0;
-      let currentProgress = 0;
-      
-      const updateFooter = () => {
-        // Smooth interpolation
-        currentProgress += (targetProgress - currentProgress) * 0.08;
-        
-        // Apply transforms based on current progress
-        const yValue = -100 + (currentProgress * 100);
-        const scaleValue = (!isMobile ? 0.92 : 1) + (currentProgress * (1 - (!isMobile ? 0.92 : 1)));
-        const opacityValue = 0.5 + (currentProgress * 0.5);
-        
-        gsap.set(footer, {
-          y: `${yValue}%`,
-          scale: scaleValue,
-          opacity: opacityValue,
-          force3D: true,
-        });
-        
-        if (Math.abs(targetProgress - currentProgress) > 0.001) {
-          animationId = requestAnimationFrame(updateFooter);
-        }
-      };
-  
-      ScrollTrigger.create({
-        trigger: service,
-        start: "top bottom",
-        end: "bottom center",
-        onUpdate: (self) => {
-          targetProgress = self.progress;
-          if (!animationId) {
-            animationId = requestAnimationFrame(updateFooter);
-          }
-        },
-        onToggle: (self) => {
-          if (!self.isActive) {
-            if (animationId) {
-              cancelAnimationFrame(animationId);
-              animationId = null;
-            }
-          }
-        }
-      });
-  
-      // Clean up
-      return () => {
-        if (animationId) {
-          cancelAnimationFrame(animationId);
-        }
-        footer.style.willChange = 'auto';
-      };
-    }, 100);
-  
-    return () => clearTimeout(timeout);
-  }, { scope: sectionRef, dependencies: [hasMounted, isMobile] });
-  */
+ 
 
 
-  // Now place the conditional return after all hooks
   if (!hasMounted) return null;
 
   return (
