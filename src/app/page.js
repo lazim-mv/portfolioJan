@@ -1,34 +1,310 @@
 "use client"
-import Header from "./components/header/Header";
-import Hero from "./components/hero/Hero";
-import About from "./components/about/About";
-import Projects from "./components/projects/Projects";
-import Footer from "./components/footer/Footer";
+
+import { useEffect, useRef, useState } from "react";
+import About from "./components/About/About";
+import Header from "./components/Header/Header";
+import Hero from "./components/Hero/Hero";
+import Projects from "./components/Projects/Projects";
+import Services from "./components/Services/Services";
+import Testimonials from "./components/Testimonials/Testimonials";
+import { useGSAP } from "@gsap/react";
+import Footer from "./components/Footer/Footer";
+import gsap from "./utils/gsapInit";
+import { useWindowWidth } from "@react-hook/window-size";
 
 export default function Home() {
+  const [hasMounted, setHasMounted] = useState(false);
+  const sectionRef = useRef(null);
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth < 768;
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+
+  useGSAP(() => {
+    if (!hasMounted || !sectionRef.current) return;
+
+    const timeout = setTimeout(() => {
+      const hero = sectionRef.current?.querySelector("#hero");
+      const testi = sectionRef.current?.querySelector("#testimonials");
+      const footer = sectionRef.current?.querySelector("#footer");
+      const service = sectionRef.current?.querySelector("#servicesSection");
+
+      if (!hero || !testi || !service || !footer) return;
+
+      // HERO
+      gsap.fromTo(
+        hero,
+        {
+          y: "0%",
+          scale: 1,
+          opacity: 1,
+          zIndex: 1,
+        },
+        {
+          y: "37%",
+          scaleX: !isMobile ? 0.92 : 0.96,
+          scaleY: !isMobile ? 0.92 : 0.96,
+          opacity: 0,
+          ease: "none",
+          force3D: true,
+          scrollTrigger: {
+            trigger: hero,
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.5,
+            anticipatePin: 1,
+            fastScrollEnd: true,
+            preventOverlaps: true,
+            refreshPriority: 1,
+          },
+        }
+      );
+
+      // TESTIMONIALS
+      gsap.fromTo(
+        testi,
+        {
+          y: "0%",
+          scale: 1,
+          opacity: 1,
+          zIndex: 1,
+        },
+        {
+          y: "45%",
+          scaleX: !isMobile ? 0.92 : 0.96,
+          scaleY: !isMobile ? 0.92 : 0.96,
+          opacity: 0,
+          ease: "none",
+          force3D: true,
+          scrollTrigger: {
+            trigger: testi,
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.5,
+            anticipatePin: 1,
+            fastScrollEnd: true,
+            preventOverlaps: true,
+            refreshPriority: 1,
+          },
+        }
+      );
+
+      // FOOTER - OPTIMIZED FOR SMOOTH ANIMATION
+
+      // Set up CSS properties for hardware acceleration
+      footer.style.willChange = 'transform, opacity';
+      footer.style.transformStyle = 'preserve-3d';
+      footer.style.backfaceVisibility = 'hidden';
+      footer.style.perspective = '1000px';
+
+      // Clear any existing transforms
+      gsap.set(footer, {
+        clearProps: "transform",
+      });
+
+      // Set initial state with more stable values
+      gsap.set(footer, {
+        y: "-100%",
+        scale: !isMobile ? 0.92 : 1,
+        opacity: 0.5,
+        rotationX: 0, // Prevent any rotation issues
+        rotationY: 0,
+        rotationZ: 0,
+        force3D: true,
+      });
+
+      // Create the smooth footer animation
+      const footerTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: service, // Use service as trigger instead of footer
+          start: "top bottom",
+          end: "bottom center",
+          scrub: 0.5,
+          anticipatePin: 1,
+          fastScrollEnd: true,
+          preventOverlaps: true,
+          refreshPriority: 1,
+          // markers: true,
+        },
+      });
+
+      // Add the animation to the timeline
+      footerTl.to(footer, {
+        y: "0%",
+        scale: 1,
+        opacity: 1,
+        duration: 1,
+        ease: "none",
+        force3D: true,
+        transformOrigin: "center center",
+      });
+
+      console.log("GSAP timeline created:", footerTl);
+
+      // Clean up function
+      return () => {
+        footerTl.kill();
+        footer.style.willChange = 'auto';
+      };
+    }, 100);
+
+    return () => clearTimeout(timeout);
+  }, { scope: sectionRef, dependencies: [hasMounted, isMobile] });
+
+
+  /*
+  useGSAP(() => {
+    if (!hasMounted || !sectionRef.current) return;
+  
+    const timeout = setTimeout(() => {
+      const hero = sectionRef.current?.querySelector("#hero");
+      const testi = sectionRef.current?.querySelector("#testimonials");
+      const footer = sectionRef.current?.querySelector("#footer");
+      const service = sectionRef.current?.querySelector("#servicesSection");
+  
+      if (!hero || !testi || !service || !footer) return;
+  
+      // HERO and TESTIMONIALS animations (same as above)
+      // ... (keep the same hero and testimonials code)
+  
+      // ULTRA SMOOTH FOOTER ANIMATION
+      
+      // Hardware acceleration setup
+      footer.style.willChange = 'transform, opacity';
+      footer.style.transformStyle = 'preserve-3d';
+      footer.style.backfaceVisibility = 'hidden';
+      
+      // Use requestAnimationFrame for smoother updates
+      let animationId;
+      let targetProgress = 0;
+      let currentProgress = 0;
+      
+      const updateFooter = () => {
+        // Smooth interpolation
+        currentProgress += (targetProgress - currentProgress) * 0.08;
+        
+        // Apply transforms based on current progress
+        const yValue = -100 + (currentProgress * 100);
+        const scaleValue = (!isMobile ? 0.92 : 1) + (currentProgress * (1 - (!isMobile ? 0.92 : 1)));
+        const opacityValue = 0.5 + (currentProgress * 0.5);
+        
+        gsap.set(footer, {
+          y: `${yValue}%`,
+          scale: scaleValue,
+          opacity: opacityValue,
+          force3D: true,
+        });
+        
+        if (Math.abs(targetProgress - currentProgress) > 0.001) {
+          animationId = requestAnimationFrame(updateFooter);
+        }
+      };
+  
+      ScrollTrigger.create({
+        trigger: service,
+        start: "top bottom",
+        end: "bottom center",
+        onUpdate: (self) => {
+          targetProgress = self.progress;
+          if (!animationId) {
+            animationId = requestAnimationFrame(updateFooter);
+          }
+        },
+        onToggle: (self) => {
+          if (!self.isActive) {
+            if (animationId) {
+              cancelAnimationFrame(animationId);
+              animationId = null;
+            }
+          }
+        }
+      });
+  
+      // Clean up
+      return () => {
+        if (animationId) {
+          cancelAnimationFrame(animationId);
+        }
+        footer.style.willChange = 'auto';
+      };
+    }, 100);
+  
+    return () => clearTimeout(timeout);
+  }, { scope: sectionRef, dependencies: [hasMounted, isMobile] });
+  */
+
+
+  // Now place the conditional return after all hooks
+  if (!hasMounted) return null;
+
   return (
-    <div className="min-h-screen bg-background" role="document" >
-      <nav className="sr-only focus-within:not-sr-only" aria-label="Skip links">
-        <a href="#main-content" className="fixed top-0 left-0 p-2 bg-black text-white focus:outline-none focus:ring-2 focus:ring-white translate-y-0">
-          Skip to main content
-        </a>
-        <a href="#about" className="fixed top-0 left-0 p-2 bg-black text-white focus:outline-none focus:ring-2 focus:ring-white translate-y-10">
-          Skip to about section
-        </a>
-        <a href="#projects" className="fixed top-0 left-0 p-2 bg-black text-white focus:outline-none focus:ring-2 focus:ring-white translate-y-20">
-          Skip to projects section
-        </a>
-        <a href="#contact" className="fixed top-0 left-0 p-2 bg-black text-white focus:outline-none focus:ring-2 focus:ring-white translate-y-30">
-          Skip to contact section
-        </a>
-      </nav>
-      <Header />
-      <main id="main-content" tabIndex="-1">
-        <Hero />
-        <About />
-        <Projects />
-        <Footer />
-      </main>
+    <div ref={sectionRef} className="relative">
+      <Header isMobile={isMobile} hasMounted={hasMounted} />
+      <section className="bg-[#1a1a1a]"
+        style={{
+          willChange: 'opacity, transform',
+          opacity: 1,
+          transformStyle: 'preserve-3d',
+        }}
+      >
+        <Hero isMobile={isMobile} hasMounted={hasMounted} />
+      </section>
+      <section
+        id="about"
+        className='bg-white relative z-10'
+        style={{
+          padding: `max(${isMobile ? "2rem, 32px" : "8rem, 96px"}) 5vw max(${isMobile ? "6rem, 96px" : "10rem, 96px"})`,
+        }}
+      >
+        <About isMobile={isMobile} hasMounted={hasMounted} />
+      </section>
+      <div className='hero-divider h-[1px] bg-[#d0d0d0]'
+        style={{
+          width: "100%"
+
+        }}
+      ></div>
+      <section
+        id="projects"
+        className="bg-white"
+        style={{
+          padding: `max(${isMobile ? "2rem, 80px" : "8rem, 96px"}) 5vw max(${isMobile ? "5rem, 80px" : "10rem, 96px"})`,
+        }}
+
+      >
+        <Projects isMobile={isMobile} hasMounted={hasMounted} />
+      </section>
+      <div className='hero-divider h-[1px] bg-[#d0d0d0]'
+        style={{
+          width: "100%"
+        }}
+      ></div>
+      <section
+
+        className="bg-white"
+        style={{
+          padding: `max(${isMobile ? "2rem, 80px" : "8rem, 96px"}) 5vw max(${isMobile ? "5rem, 100px" : "10rem, 96px"})`,
+        }}
+      >
+        <Testimonials isMobile={isMobile} hasMounted={hasMounted} />
+      </section>
+
+      <section
+        id="servicesSection"
+      >
+        <Services isMobile={isMobile} hasMounted={hasMounted} />
+      </section>
+
+      <section
+        id="footer"
+        className="bg-white"
+        style={{ padding: isMobile ? '80px 5vw 0' : "max(8rem, 96px) 5vw 0" }}
+      >
+        <Footer isMobile={isMobile} hasMounted={hasMounted} />
+      </section>
     </div>
   );
 }

@@ -1,6 +1,17 @@
 import "./globals.css";
+import { Manrope,Noto_Serif } from "next/font/google";
+import SmoothScrolling from "./utils/SmoothScrolling";
 
 
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+});
+
+const notoSerif = Noto_Serif({
+  variable: "--font-notoSerif",
+  subsets: ["latin"],
+});
 
 export const metadata = {
   title: "Lazim MV — Software Developer",
@@ -73,11 +84,12 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.png" type="image/png" />
       </head>
       <body
-        className={`antialiased`}
+        className={`antialiased ${manrope.variable} ${notoSerif.variable}`}
         id="main-content"
-        style={{ fontFamily: "var(--font-boring-sans)" }}
       >
+        <SmoothScrolling>
         {children}
+        </SmoothScrolling>
       </body>
     </html>
   );

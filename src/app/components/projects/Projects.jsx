@@ -1,241 +1,206 @@
-import React, { useState, useEffect, useRef } from "react";
-import styles from "./Projects.module.css";
-import Image from "next/image";
-import { SquareArrowDownRight, X, Eye } from "lucide-react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import AnimatedText from "../animations/AnimatedText";
-import TitleAnimation from "../animations/TitleAnimations";
+"use client"
+import React, { useState, useEffect, useRef } from 'react'
+import { projectData } from './data'
+import Image from 'next/image'
+import bgImg from '../../../../public/new/bg.jpg'
+import Link from 'next/link'
+import smartplus from '../../../../public/new/projects/smartplus.png'
+import { useGSAP } from '@gsap/react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useLenis } from 'lenis/react'
 
-gsap.registerPlugin(ScrollTrigger);
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger)
 
-const Projects = () => {
-    const [iframeLink, setIframeLink] = useState("");
-    const titleRef = useRef(null);
-    const dialogRef = useRef(null);
-    const previousFocusRef = useRef(null);
+const Projects = ({ isMobile, hasMounted }) => {
+    const lenis = useLenis();
+    const [showAll, setShowAll] = useState(false)
+    const containerRef = useRef(null)
+    const projectRefs = useRef([])
 
-    const data = [
-        {
-            name: "Nexwave",
-            link: "https://www.nexwavedigital.com/",
-            img: "/projects/nexwave.gif",
-        },
-        {
-            name: "Level Up",
-            img: "/projects/lvlup.png",
-        },
-        {
-            name: "Pullys",
-            link: "https://www.pullysons.com/",
-            img: "/projects/pullysons.gif",
-        },
-        {
-            name: "Car & Bikes",
-            link: "https://adminautosports.vercel.app/bikes",
-            img: "/projects/autosportsdash.jpg",
-        },
-        {
-            name: "Motobike",
-            link: "https://client-bikes.vercel.app/",
-            img: "/projects/motobike.gif",
-        },
-        {
-            name: "AutoTraders",
-            link: "https://cars-client-iota.vercel.app/",
-            img: "/projects/autotraders.gif",
-        },
-        {
-            name: "Mavrriq",
-            link: "https://www.mavrriq.com/",
-            img: "/projects/Maveriq.gif",
-        },
-        {
-            name: "Pullys",
-            link: "https://www.pullysons.com/",
-            img: "/projects/pullysons.gif",
-        },
-    ];
+    const visibleProjects = showAll ? projectData : projectData.slice(0, 4)
 
-    useEffect(() => {
-        const title = titleRef.current;
-        if (title) {
-            const text = title.textContent;
-            title.innerHTML = `
-                <div class="${styles.titleWrapper}" role="heading" aria-level="1">
-                    <span class="${styles.textBase}">${text}</span>
-                    <span class="${styles.textFill}" aria-hidden="true">${text}</span>
-                </div>
-            `;
+    // useGSAP(() => {
 
-            gsap.fromTo(
-                `.${styles.textFill}`,
-                {
-                    clipPath: "inset(100% 0 0 0)",
-                },
-                {
-                    clipPath: "inset(0% 0 0 0)",
-                    scrollTrigger: {
-                        trigger: title,
-                        start: "top 20%",
-                        end: "top -20%",
-                        scrub: 1,
-                        toggleActions: "restart none none reverse"
-                    }
-                }
-            );
-        }
-    }, []);
+    //     ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+
+
+    //     projectRefs.current.forEach((ref, index) => {
+    //         if (ref) {
+    //             const image = ref.querySelector('.parallax-image')
+    //             const webImage = ref.querySelector('.web-image')
+
+    //             if (image) {
+    //                 gsap.set(image, {
+    //                     transformStyle: 'preserve-3d',
+    //                     willChange: 'transform',
+    //                     scale: 1.3,
+    //                 })
+
+    //                 gsap.to(image, {
+    //                     yPercent: -8,
+    //                     scale: 1.3,
+    //                     ease: 'none',
+    //                     scrollTrigger: {
+    //                         trigger: ref,
+    //                         start: 'top bottom',
+    //                         end: 'bottom top',
+    //                         scrub: 1,
+    //                         invalidateOnRefresh: true,
+    //                     }
+    //                 })
+    //             }
+
+    //             // Add scale animation for webImage
+    //             if (webImage) {
+    //                 gsap.set(webImage, {
+    //                     scale: 0.95,
+    //                     transformOrigin: 'center center',
+    //                 })
+
+    //                 gsap.to(webImage, {
+    //                     scale: 1,
+    //                     duration: 0.8,
+    //                     ease: 'power2.out',
+    //                     scrollTrigger: {
+    //                         trigger: ref,
+    //                         start: 'top 75%',
+    //                         end: 'bottom 25%',
+    //                         toggleActions: 'play none none reverse',
+    //                         invalidateOnRefresh: true,
+    //                     }
+    //                 })
+    //             }
+    //         }
+    //     })
+
+    //     return () => {
+    //         ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+    //     }
+    // }, { scope: containerRef, dependencies: [visibleProjects.length, hasMounted, isMobile] })
+
 
     useEffect(() => {
-        if (iframeLink) {
-            previousFocusRef.current = document.activeElement;
+        projectRefs.current = projectRefs.current.slice(0, visibleProjects.length)
+    }, [visibleProjects.length])
 
-            gsap.fromTo(
-                `.${styles.iframeView}`,
-                { y: "100%" },
-                { 
-                    y: "0%", 
-                    duration: 1, 
-                    ease: "power3.out",
-                    onComplete: () => {
-                        const closeButton = dialogRef.current?.querySelector('button');
-                        closeButton?.focus();
-                    }
-                }
-            );
 
-            const handleTabKey = (e) => {
-                if (!dialogRef.current) return;
-                
-                const focusableElements = dialogRef.current.querySelectorAll(
-                    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-                );
-                const firstFocusable = focusableElements[0];
-                const lastFocusable = focusableElements[focusableElements.length - 1];
+    const handleToggleView = () => {
+        const newShowAll = !showAll
+        setShowAll(newShowAll)
 
-                if (e.key === 'Tab') {
-                    if (e.shiftKey) {
-                        if (document.activeElement === firstFocusable) {
-                            e.preventDefault();
-                            lastFocusable.focus();
-                        }
-                    } else {
-                        if (document.activeElement === lastFocusable) {
-                            e.preventDefault();
-                            firstFocusable.focus();
-                        }
-                    }
-                }
-            };
 
-            const handleEscape = (e) => {
-                if (e.key === 'Escape') {
-                    setIframeLink("");
-                }
-            };
-
-            document.addEventListener('keydown', handleTabKey);
-            document.addEventListener('keydown', handleEscape);
-
-            return () => {
-                document.removeEventListener('keydown', handleTabKey);
-                document.removeEventListener('keydown', handleEscape);
-            };
-        } else {
-            previousFocusRef.current?.focus();
+        if (!showAll && newShowAll && lenis && containerRef.current) {
+            setTimeout(() => {
+                const containerBottom = containerRef.current.offsetTop + containerRef.current.offsetHeight
+                const offset = containerBottom - 1500
+                lenis.scrollTo(offset, { duration: 1.2 })
+            }, 100)
         }
-    }, [iframeLink]);
+    }
 
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            e.target.click();
-        }
-    };
+    if (!hasMounted) {
+        return null
+    }
+
+
 
     return (
-        <section className={styles.container} id="projects" aria-label="Latest Projects">
-            <TitleAnimation text="Latest Work" className={styles.title} />
-            <div className={styles.cards} role="list">
-                {data.map((project, index) => (
-                    <article
+        <div ref={containerRef}>
+            <div className='flex justify-between items-start'>
+                <h6 className='
+                    flex items-center
+                    text-black  
+                    '>
+                    <span className='mb-1 pr-2'>■</span>
+                    Projects
+                </h6>
+
+                <Link
+                    href=""
+                    onClick={(e) => {
+                        e.preventDefault()
+                        handleToggleView()
+
+                    }}
+                    className="relative group overflow-hidden  mb-6 md:inline-block hidden"
+                >
+                    <span className="text-black">{showAll ? "Hide" : "View More"}</span>
+                    <span className="text-[rgba(255,255,255,.9)] block absolute top-full left-0 transition-transform duration-300 group-hover:translate-y-[-100%]">
+                        {showAll ? "Hide" : "View More"}
+                    </span>
+                </Link>
+
+            </div>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-8 lg:gap-12 md:pt-[50px] pt-[46px] pb-5'
+                style={{
+                    gridColumnGap: 'max(3vw, 40px)', gridRowGap: isMobile ? 'max(2.25rem, 36px)' : 'max(3.5vw, 64px)'
+                }}>
+                {visibleProjects.map((project, index) => (
+                    <div
+                        ref={el => projectRefs.current[index] = el}
+                        onClick={() => window.open(project.link, '_blank')}
                         key={index}
-                        className={styles.card}
-                        role="listitem"
+                        className='group cursor-pointer md:rounded-[.4rem] rounded-lg overflow-hidden'
                     >
-                        <div className={styles.cardHeading}>
-                            <AnimatedText text={project.name} />
-                            {project.link && (
-                                <button
-                                    onClick={() => project.link && setIframeLink(project.link)}
-                                    onKeyDown={handleKeyPress}
-                                    className={styles.previewButton}
-                                    aria-label={`Preview ${project.name} website`}
-                                >
-                                    <SquareArrowDownRight className={styles.icon} strokeWidth={0.75} aria-hidden="true" />
-                                </button>
+                        <div className="
+                                    relative 
+                                    aspect-[4/3]
+                                    w-[100%]
+                                    max-h-[551px]
+                                    md:rounded-[.4rem] rounded-lg 
+                                    overflow-hidden
+                                    flex
+                                    items-center
+                                    justify-center
+                                    transition-all duration-400 ease-out
+                                    hover:-translate-y-1
+                                    hover:shadow-xl hover:shadow-black/20
+                                    border border-[##7a7a7a]"
+                        >
+                            <Image
+                                src={project.image}
+                                alt={project.name}
+                                fill
+                                className="parallax-image md:rounded-[.4rem] rounded-lg overflow-hidden blur-[4px] object-cover object-center"
+                                quality={100}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+                                style={{
+                                    transformStyle: 'preserve-3d',
+                                    willChange: 'transform'
+                                }}
+                            />
+
+
+                            <div className="relative aspect-[1902/911] shadow-sm bg-gray-100 w-[90%] md:rounded-[.4rem] rounded-lg overflow-hidden">
+                                <Image
+                                    src={project.webImage}
+                                    alt={project.name}
+                                    fill
+                                    className="web-image object-cover md:rounded-[.4rem] rounded-lg shadow-sm"
+                                    quality={100}
+                                    sizes="(max-width: 768px) 90vw, (max-width: 1200px) 90vw, 90vw"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Project title */}
+                        <div className="mt-4 text-start">
+                            <h3 className="text-medium text-black">
+                                {project.name}
+                            </h3>
+                            {project.description && (
+                                <p className="text-medium text-[#8a8a8a] mt-1">
+                                    {project.description}
+                                </p>
                             )}
                         </div>
-                        <Image
-                            src={project.img}
-                            alt={`Screenshot of ${project.name} website`}
-                            width={400}
-                            height={300}
-                            className={styles.projectImage}
-                        />
-                    </article>
+                    </div>
                 ))}
             </div>
+        </div>
+    )
+}
 
-            {iframeLink && (
-                <div 
-                    ref={dialogRef}
-                    className={styles.iframeView}
-                    role="dialog"
-                    aria-modal="true"
-                    aria-label="Website Preview"
-                >
-                    <div 
-                        className={styles.iframeViewWrap}
-                        aria-label="Preview content"
-                    >
-                        <div 
-                            className={styles.iframeHeader}
-                            role="toolbar"
-                            aria-label="Preview controls"
-                        >
-                            <button
-                                className={styles.iconContainer}
-                                onClick={() => setIframeLink("")}
-                                onKeyDown={handleKeyPress}
-                                aria-label="Close preview"
-                            >
-                                <X className={styles.closeIcon} color="white" aria-hidden="true" />
-                            </button>
-                            <a 
-                                href={iframeLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={styles.iconContainer}
-                                aria-label="Open website in new tab"
-                            >
-                                <Eye className={styles.viewIcon} color="white" aria-hidden="true" />
-                            </a>
-                        </div>
-                        <iframe 
-                            src={iframeLink} 
-                            frameBorder="0" 
-                            className={styles.iframe}
-                            title="Website Preview"
-                            aria-label={`Preview of website in iframe`}
-                            loading="lazy"
-                        ></iframe>
-                    </div>
-                </div>
-            )}
-        </section>
-    );
-};
-
-export default Projects;
+export default Projects
