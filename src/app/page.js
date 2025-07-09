@@ -10,6 +10,7 @@ import About from "./components/about/About";
 import Projects from "./components/projects/Projects";
 import Testimonials from "./components/testimonials/Testimonials";
 import Footer from "./components/footer/Footer";
+import Services from "./components/services/Services";
 
 
 export default function Home() {
