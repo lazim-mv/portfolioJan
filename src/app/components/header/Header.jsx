@@ -25,7 +25,7 @@ const Header = ({ isMobile, hasMounted }) => {
     const navLinks = [
         { label: "About Me", href: "#about" },
         { label: "Projects", href: "#projects" },
-        { label: "Services", href: "#servicesSection" },
+        { label: "Services", href: "#services" },
         { label: "Contact", href: "#footerName" },
     ];
 

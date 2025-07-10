@@ -31,7 +31,7 @@ export default function Home() {
       const hero = sectionRef.current?.querySelector("#hero");
       const testi = sectionRef.current?.querySelector("#whiteSection");
       const footer = sectionRef.current?.querySelector("#footer");
-      const service = sectionRef.current?.querySelector("#servicesSection");
+      const service = sectionRef.current?.querySelector("#services");
 
       if (!hero || !testi || !service || !footer) return;
 
@@ -218,7 +218,7 @@ export default function Home() {
       </div>
 
       <section
-        id="servicesSection"
+        id="services"
       >
         <Services isMobile={isMobile} hasMounted={hasMounted} />
       </section>

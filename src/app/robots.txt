@@ -10,8 +10,11 @@ Disallow: /api/
 Disallow: /_next/
 Disallow: /static/
 
+# Priority pages
+Allow: /
+
 # Crawl delay
-Crawl-delay: 10
+Crawl-delay: 5
 
 # Sitemap location
 Sitemap: https://lazimmv.vercel.app/sitemap.xml
