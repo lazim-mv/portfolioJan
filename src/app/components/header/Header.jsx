@@ -150,7 +150,7 @@ const Header = ({ isMobile, hasMounted }) => {
 
             <div
                 ref={containerRef}
-                className="h-screen w-full fixed top-0 left-0 bg-black z-20 flex flex-col justify-between pt-[22vh] pb-[5vh] px-[5vw]"
+                className="h-svh w-full fixed top-0 left-0 bg-black z-20 flex flex-col justify-between pt-[22vh] pb-[5vh] px-[5vw]"
                 style={{ transform: "translateX(100%)" }}
             >
                 <div id="mobileMenu" className="flex flex-col gap-2">
