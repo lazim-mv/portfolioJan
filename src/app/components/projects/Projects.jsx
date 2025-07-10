@@ -2,9 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { projectData } from './data'
 import Image from 'next/image'
-import bgImg from '../../../../public/new/bg.jpg'
 import Link from 'next/link'
-import smartplus from '../../../../public/new/projects/smartplus.png'
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -161,7 +159,7 @@ const Projects = ({ isMobile, hasMounted }) => {
                         >
                             <Image
                                 src={project.image}
-                                alt={project.name}
+                                alt={project.alt}
                                 fill
                                 className="parallax-image md:rounded-[.4rem] rounded-lg overflow-hidden blur-[4px] object-cover object-center"
                                 quality={100}
@@ -176,7 +174,7 @@ const Projects = ({ isMobile, hasMounted }) => {
                             <div className="relative aspect-[1902/911] shadow-sm bg-gray-100 w-[90%] md:rounded-[.4rem] rounded-lg overflow-hidden">
                                 <Image
                                     src={project.webImage}
-                                    alt={project.name}
+                                    alt={`${project.alt}(blurred bakcground)`}
                                     fill
                                     className="web-image object-cover md:rounded-[.4rem] rounded-lg shadow-sm"
                                     quality={100}

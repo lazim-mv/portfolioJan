@@ -140,7 +140,7 @@ const Footer = ({ isMobile, hasMounted }) => {
                         <h6 className='text-[#7a7a7a]'>{footerData.legal.copyright}</h6>
                         <div className='flex gap-5'>{footerData.legal.links.map((link, index) => (
                             <h6 className='text-[#1a1a1a]' style={{ marginTop: "max(.25rem, 4px)" }} key={index}>
-                                {link.label}
+                                <a href={link.href} target='_blank'>{link.label}</a>
                             </h6>
                         ))}</div>
                     </div>

@@ -124,7 +124,7 @@ const Header = ({ isMobile, hasMounted }) => {
                 "
                 id="header"
             >
-                <h6 className='header-name cursor-pointer'><Link href="#header">Lazim Latheef</Link></h6>
+                <h6 className='header-name cursor-pointer'><Link href="#home">Lazim Latheef</Link></h6>
                 <div className='flex items-center gap-10 headerLinks'>
                     {!isMobile && navLinks.map((text, index) => (
                         <Link href={text.href} key={index} className="relative group overflow-hidden h-[24px]">

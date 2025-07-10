@@ -198,7 +198,7 @@ const About = ({ isMobile, hasMounted }) => {
                     <Image
                         className='h-[100%] w-[100%] object-contain object-top grayscale hover:grayscale-0 transition duration-300'
                         src={profile1}
-                        alt='Lazim Mv Image'
+                        alt='Lazim Latheef — Fullstack Developer also known as Lazim MV'
                     />
                 </div>
             </div>

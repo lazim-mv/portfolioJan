@@ -1,7 +1,6 @@
 import "./globals.css";
-import { Manrope,Noto_Serif } from "next/font/google";
+import { Manrope, Noto_Serif } from "next/font/google";
 import SmoothScrolling from "./utils/SmoothScrolling";
-
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -14,29 +13,33 @@ const notoSerif = Noto_Serif({
 });
 
 export const metadata = {
-  title: "Lazim MV — Software Developer",
-  description: "Crafting high-performance web and mobile solutions. Explore my portfolio showcasing expertise in Next.js, React, and scalable web applications.",
-  keywords: "software developer, web developer, fullstack developer, Next.js developer, React developer, mobile app developer",
+  title: "Lazim Latheef (Lazim MV) — Software Developer",
+  description:
+    "I'm Lazim Latheef, a fullstack developer crafting high-performance web and mobile solutions. Explore my portfolio showcasing expertise in Next.js, React, and scalable apps.",
+  keywords:
+    "Lazim, Lazim MV, Lazim Latheef, software developer, web developer, fullstack developer, Next.js, React, mobile app developer, portfolio",
   openGraph: {
-    title: "Lazim MV — Software Developer",
-    description: "Crafting high-performance web and mobile solutions. Explore my portfolio showcasing expertise in Next.js, React, and scalable web applications.",
+    title: "Lazim Latheef (Lazim MV) — Software Developer",
+    description:
+      "I'm Lazim Latheef, a fullstack developer crafting high-performance web and mobile solutions. Explore my portfolio showcasing expertise in Next.js, React, and scalable apps.",
     url: "https://lazimmv.vercel.app",
     siteName: "Lazim MV Portfolio",
     images: [
       {
-        url: "https://lazimmv.vercel.app/openGraph.png", // Add your OG image
+        url: "https://lazimmv.vercel.app/openGraph.png",
         width: 1200,
         height: 630,
-      }
+      },
     ],
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lazim MV — Software Developer",
-    description: "Crafting high-performance web and mobile solutions. Explore my portfolio showcasing expertise in Next.js, React, and scalable web applications.",
-    images: ["https://lazimmv.vercel.app/openGraph.png"], // Add your Twitter card image
+    title: "Lazim Latheef (Lazim MV) — Software Developer",
+    description:
+      "I'm Lazim Latheef, a fullstack developer crafting high-performance web and mobile solutions. Explore my portfolio showcasing expertise in Next.js, React, and scalable apps.",
+    images: ["https://lazimmv.vercel.app/openGraph.png"],
   },
   robots: {
     index: true,
@@ -51,20 +54,16 @@ export const metadata = {
   },
 };
 
-
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Preload the GA script */}
+        <link rel="icon" href="/favicon.png" type="image/png" />
         <link
           rel="preload"
           href="https://www.googletagmanager.com/gtag/js?id=G-R945BBRD1B"
           as="script"
         />
-
-        {/* Load GA directly in <head> */}
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-R945BBRD1B"
@@ -72,24 +71,36 @@ export default function RootLayout({ children }) {
         <script
           dangerouslySetInnerHTML={{
             __html: `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-R945BBRD1B');
-      `,
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-R945BBRD1B');
+            `,
           }}
         />
-      </head>
-      <head>
-        <link rel="icon" href="/favicon.png" type="image/png" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Lazim Latheef",
+              alternateName: "Lazim MV",
+              url: "https://lazimmv.vercel.app",
+              jobTitle: "Software Developer",
+              sameAs: [
+                "https://www.linkedin.com/in/lazim-mv-/",
+                "https://github.com/lazim-mv",
+              ],
+            }),
+          }}
+        />
       </head>
       <body
         className={`antialiased ${manrope.variable} ${notoSerif.variable}`}
         id="main-content"
       >
-        <SmoothScrolling>
-        {children}
-        </SmoothScrolling>
+        <SmoothScrolling>{children}</SmoothScrolling>
       </body>
     </html>
   );

@@ -162,7 +162,7 @@ export default function Home() {
   if (!hasMounted) return null;
 
   return (
-    <div ref={sectionRef} className="relative">
+    <div ref={sectionRef} className="relative" id="home">
       <Header isMobile={isMobile} hasMounted={hasMounted} />
       <section className="bg-[#1a1a1a]"
         style={{

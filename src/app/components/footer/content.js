@@ -10,10 +10,11 @@ export const footerData = {
         }
     },
     legal: {
-        copyright: "© 2025",
+        copyright: "© 2025 Lazim Latheef",
         links: [
-            { label: "LinkedIn", href: "https://www.linkedin.com/in/your-profile" },
-            { label: "Instagram", href: "https://www.instagram.com/yourprofile" }
+            { label: "LinkedIn", href: "https://www.linkedin.com/in/lazim-mv-/" },
+            { label: "Instagram", href: "https://www.instagram.com/lazim_mv/" },
+            { label: "GitHub", href: "https://github.com/lazim-mv" }
         ]
     }
 };
