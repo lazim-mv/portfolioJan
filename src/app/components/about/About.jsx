@@ -210,7 +210,7 @@ const About = ({ isMobile, hasMounted }) => {
                 </h2>
 
                 <div className="desc-wrapper">
-                    <DistortText className='text-medium text-[#8a8a8a]' distortChar=".:">
+                    <DistortText className='' distortChar=".:">
                         <p className='text-medium text-[#8a8a8a]'>
                             I craft immersive web and mobile experiences that blend performance with personality.
                             Whether it's a sleek dashboard or a smooth app, I turn ideas into pixel perfect, interactive realities.

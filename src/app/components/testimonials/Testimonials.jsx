@@ -62,18 +62,24 @@ const Testimonials = ({ isMobile, hasMounted }) => {
                         </div>
 
                         {/* Dots indicator */}
-                        <div className='flex gap-2 md:mt-6 mt-[30px] md:mb-0 mb-[30px]'>
+                        {isMobile && <div className='flex gap-3 md:mt-6 mt-[30px] md:mb-0 mb-[30px]'>
                             {testimonialsData.map((_, index) => (
                                 <button
                                     key={index}
                                     onClick={() => setCurrentIndex(index)}
-                                    className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex
-                                        ? 'bg-black w-6'
-                                        : 'bg-gray-300 hover:bg-gray-400'
-                                        }`}
+                                    aria-label={`Go to testimonial ${index + 1}`}
+                                    className={`rounded-full transition-all duration-300 flex items-center justify-center
+        ${index === currentIndex ? 'bg-black w-6 h-2' : 'bg-gray-300 hover:bg-gray-400 w-4 h-4'}
+      `}
+                                    style={{
+                                        minWidth: 22,
+                                        minHeight: 22,
+                                        padding: 10, // ensures enough hit area
+                                    }}
                                 />
                             ))}
-                        </div>
+                        </div>}
+
                     </div>
 
                     <div className='flex gap-3'>
