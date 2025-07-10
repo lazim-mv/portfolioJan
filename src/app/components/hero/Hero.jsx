@@ -56,7 +56,7 @@ const Hero = ({ isMobile, hasMounted }) => {
     if (!hasMounted) return null
 
     return (
-        <div ref={sectionRef} className='h-screen relative' id="hero">
+        <div ref={sectionRef} className='h-svh relative' id="hero">
             <div className='h-svh flex flex-col justify-end relative z-10 px-[5vw] md:pb-[5vw] pb-[10vw]'>
                 <div className='
                 flex justify-between 

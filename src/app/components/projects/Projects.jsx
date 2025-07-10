@@ -21,64 +21,64 @@ const Projects = ({ isMobile, hasMounted }) => {
 
     const visibleProjects = showAll ? projectData : projectData.slice(0, 4)
 
-    // useGSAP(() => {
+    useGSAP(() => {
 
-    //     ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill())
 
 
-    //     projectRefs.current.forEach((ref, index) => {
-    //         if (ref) {
-    //             const image = ref.querySelector('.parallax-image')
-    //             const webImage = ref.querySelector('.web-image')
+        projectRefs.current.forEach((ref, index) => {
+            if (ref) {
+                const image = ref.querySelector('.parallax-image')
+                const webImage = ref.querySelector('.web-image')
 
-    //             if (image) {
-    //                 gsap.set(image, {
-    //                     transformStyle: 'preserve-3d',
-    //                     willChange: 'transform',
-    //                     scale: 1.3,
-    //                 })
+                if (image) {
+                    gsap.set(image, {
+                        transformStyle: 'preserve-3d',
+                        willChange: 'transform',
+                        scale: 1.3,
+                    })
 
-    //                 gsap.to(image, {
-    //                     yPercent: -8,
-    //                     scale: 1.3,
-    //                     ease: 'none',
-    //                     scrollTrigger: {
-    //                         trigger: ref,
-    //                         start: 'top bottom',
-    //                         end: 'bottom top',
-    //                         scrub: 1,
-    //                         invalidateOnRefresh: true,
-    //                     }
-    //                 })
-    //             }
+                    gsap.to(image, {
+                        yPercent: -8,
+                        scale: 1.3,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: ref,
+                            start: 'top bottom',
+                            end: 'bottom top',
+                            scrub: 1,
+                            invalidateOnRefresh: true,
+                        }
+                    })
+                }
 
-    //             // Add scale animation for webImage
-    //             if (webImage) {
-    //                 gsap.set(webImage, {
-    //                     scale: 0.95,
-    //                     transformOrigin: 'center center',
-    //                 })
+                // Add scale animation for webImage
+                if (webImage) {
+                    gsap.set(webImage, {
+                        scale: 0.95,
+                        transformOrigin: 'center center',
+                    })
 
-    //                 gsap.to(webImage, {
-    //                     scale: 1,
-    //                     duration: 0.8,
-    //                     ease: 'power2.out',
-    //                     scrollTrigger: {
-    //                         trigger: ref,
-    //                         start: 'top 75%',
-    //                         end: 'bottom 25%',
-    //                         toggleActions: 'play none none reverse',
-    //                         invalidateOnRefresh: true,
-    //                     }
-    //                 })
-    //             }
-    //         }
-    //     })
+                    gsap.to(webImage, {
+                        scale: 1,
+                        duration: 0.8,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: ref,
+                            start: 'top 75%',
+                            end: 'bottom 25%',
+                            toggleActions: 'play none none reverse',
+                            invalidateOnRefresh: true,
+                        }
+                    })
+                }
+            }
+        })
 
-    //     return () => {
-    //         ScrollTrigger.getAll().forEach(trigger => trigger.kill())
-    //     }
-    // }, { scope: containerRef, dependencies: [visibleProjects.length, hasMounted, isMobile] })
+        return () => {
+            ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+        }
+    }, { scope: containerRef, dependencies: [visibleProjects.length, hasMounted, isMobile] })
 
 
     useEffect(() => {

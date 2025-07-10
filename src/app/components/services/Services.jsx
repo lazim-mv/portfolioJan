@@ -107,38 +107,45 @@ const Services = ({ isMobile, hasMounted }) => {
             const cards = gsap.utils.toArray('.service-bottom')
             const dividers = gsap.utils.toArray('.service-divider')
 
+            // Set initial states
             gsap.set(lines.lines, { y: '100%' })
-            gsap.set(cards, { y: 20, opacity: 0 })
+            gsap.set(cards, { y: 40, opacity: 0 })
             gsap.set(dividers, { width: 0 })
 
-            const tl = gsap.timeline({
-                defaults: { ease: 'power3.out' },
+            // Create master timeline for sequential animations
+            const masterTimeline = gsap.timeline({
                 scrollTrigger: {
                     trigger: section2Ref.current,
-                    start: 'top 80%',
+                    start: 'top 75%',
                     end: 'bottom 20%',
                     toggleActions: 'play none none reverse',
                 },
             })
 
-            tl.to(lines.lines, {
+            // 1. Animate heading lines first
+            masterTimeline.to(lines.lines, {
                 y: '0%',
                 duration: 0.8,
-                stagger: 0.1,
+                stagger: 0.12,
                 ease: 'power2.out',
             })
-                .to(dividers, {
-                    width: '100%',
-                    duration: 1,
-                    stagger: 0.12,
-                }, '<0.3')
-                .to(cards, {
-                    y: 0,
-                    opacity: 1,
-                    duration: 1,
-                    stagger: 0.15,
-                    ease: 'back.out(1.2)',
-                }, '<0.4')
+
+            // 2. Animate dividers after heading (with slight overlap)
+            masterTimeline.to(dividers, {
+                width: '100%',
+                duration: 1.2,
+                stagger: 0.2,
+                ease: 'power2.out',
+            }, '-=0.8')
+
+            // 3. Animate cards after dividers start (with overlap for smoother flow)
+            masterTimeline.to(cards, {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.18,
+                ease: 'back.out(1.4)',
+            }, '-=1.2')
 
             return () => {
                 lines.revert()
@@ -148,6 +155,7 @@ const Services = ({ isMobile, hasMounted }) => {
 
         return () => ctx.revert()
     }, [])
+
 
     return (
         <div className="bg-[#1a1a1a] relative z-10" id='serviceContainer'>
@@ -232,7 +240,11 @@ const Services = ({ isMobile, hasMounted }) => {
                     <h4 className='service-heading overflow-hidden'>To give you full clarity on how I work, here's a quick overview of the key phases of your project.</h4>
                 </div>
 
-                <div className='flex flex-col' style={{ paddingTop: isMobile ? '60px' : 'max(8rem, 96px)' }}>
+                <div
+                    id='projectSequenceContent'
+                    className='flex flex-col'
+                    style={{ paddingTop: isMobile ? '60px' : 'max(8rem, 96px)' }}
+                >
                     {projectSequenceData.map((item, index) => (
                         <div key={index}>
                             <div className='service-divider h-[1px] bg-[#666]'

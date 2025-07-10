@@ -29,7 +29,7 @@ export default function Home() {
 
     const timeout = setTimeout(() => {
       const hero = sectionRef.current?.querySelector("#hero");
-      const testi = sectionRef.current?.querySelector("#testimonials");
+      const testi = sectionRef.current?.querySelector("#whiteSection");
       const footer = sectionRef.current?.querySelector("#footer");
       const service = sectionRef.current?.querySelector("#servicesSection");
 
@@ -74,21 +74,22 @@ export default function Home() {
           zIndex: 1,
         },
         {
-          y: "45%",
-          scaleX: !isMobile ? 0.92 : 0.96,
-          scaleY: !isMobile ? 0.92 : 0.96,
-          opacity: 0,
+          y: "10%",
+          // scaleX: !isMobile ? 0.92 : 0.96,
+          // scaleY: !isMobile ? 0.92 : 0.96,
+          opacity: .8,
           ease: "none",
           force3D: true,
           scrollTrigger: {
             trigger: testi,
-            start: "top top",
+            start: "80% bottom ",
             end: "bottom top",
             scrub: 0.5,
             anticipatePin: 1,
             fastScrollEnd: true,
             preventOverlaps: true,
             refreshPriority: 1,
+            // markers: true,
           },
         }
       );
@@ -187,33 +188,34 @@ export default function Home() {
 
         }}
       ></div>
-      <section
-        id="projects"
-        className="bg-white"
-        style={{
-          padding: `max(${isMobile ? "2rem, 80px" : "8rem, 96px"}) 5vw max(${isMobile ? "5rem, 80px" : "10rem, 96px"})`,
-        }}
+      <div id="whiteSection">
+        <section
+          id="projects"
+          className="bg-white"
+          style={{
+            padding: `max(${isMobile ? "2rem, 80px" : "8rem, 96px"}) 5vw max(${isMobile ? "5rem, 80px" : "10rem, 96px"})`,
+          }}
 
-      >
-        <Projects isMobile={isMobile} hasMounted={hasMounted} />
-      </section>
-      <div className='hero-divider h-[1px] bg-[#d0d0d0]'
-        style={{
-          width: "100%"
-        }}
-      ></div>
-      <section
-
-        className="bg-white"
-        style={{
-          padding: `max(${isMobile ? "2rem, 80px" : "8rem, 96px"}) 5vw max(${isMobile ? "5rem, 100px" : "10rem, 96px"})`,
-          willChange: 'opacity, transform',
-          opacity: 1,
-          transformStyle: 'preserve-3d',
-        }}
-      >
-        <Testimonials isMobile={isMobile} hasMounted={hasMounted} />
-      </section>
+        >
+          <Projects isMobile={isMobile} hasMounted={hasMounted} />
+        </section>
+        <div className='hero-divider h-[1px] bg-[#d0d0d0]'
+          style={{
+            width: "100%"
+          }}
+        ></div>
+        <section
+          className="bg-white"
+          style={{
+            padding: `max(${isMobile ? "2rem, 80px" : "8rem, 96px"}) 5vw max(${isMobile ? "5rem, 100px" : "10rem, 96px"})`,
+            willChange: 'opacity, transform',
+            opacity: 1,
+            transformStyle: 'preserve-3d',
+          }}
+        >
+          <Testimonials isMobile={isMobile} hasMounted={hasMounted} />
+        </section>
+      </div>
 
       <section
         id="servicesSection"
