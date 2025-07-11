@@ -1,6 +1,8 @@
 import "./globals.css";
 import { Manrope, Noto_Serif } from "next/font/google";
 import SmoothScrolling from "./utils/SmoothScrolling";
+import { GoogleAnalytics } from '@next/third-parties/google';
+// import EnhancedReferrerTracker from "./components/ReferrerTracker";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -59,7 +61,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.png" type="image/png" />
-        <link
+        {/* <link
           rel="preload"
           href="https://www.googletagmanager.com/gtag/js?id=G-R945BBRD1B"
           as="script"
@@ -77,7 +79,14 @@ export default function RootLayout({ children }) {
               gtag('config', 'G-R945BBRD1B');
             `,
           }}
-        />
+        /> */}
+
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <>
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+            {/* <EnhancedReferrerTracker /> */}
+          </>
+        )}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

@@ -11,7 +11,7 @@ import Projects from "./components/projects/Projects";
 import Testimonials from "./components/testimonials/Testimonials";
 import Footer from "./components/footer/Footer";
 import Services from "./components/services/Services";
-import ReferrerTracker from "./components/ReferrerTracker";
+// import ReferrerTracker from "./components/ReferrerTracker";
 
 
 export default function Home() {
@@ -164,7 +164,7 @@ export default function Home() {
 
   return (
     <div ref={sectionRef} className="relative" id="home">
-      <ReferrerTracker />
+      {/* <ReferrerTracker /> */}
       <Header isMobile={isMobile} hasMounted={hasMounted} />
       <section className="bg-[#1a1a1a]"
         style={{
