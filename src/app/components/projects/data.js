@@ -1,12 +1,10 @@
-import smartplus from '../../../../public/new/projects/smartplus.png'
+
 import smartplus1 from '../../../../public/projects/smartplus.gif'
-import igreenie from '../../../../public/new/projects/igreenie.png'
 import igreenie1 from '../../../../public/projects/igreenie.gif'
-import nexwave from '../../../../public/new/projects/nexwave.png'
-import motobike from '../../../../public/new/projects/motobike.png'
 import nexwave1 from '../../../../public/projects/nexwave.gif'
 import motobike1 from '../../../../public/projects/motobike.gif'
 import maveriq from '../../../../public/projects/Maveriq.gif'
+import brightLine from '../../../../public/projects/brightline.gif'
 import pullysons from '../../../../public/projects/pullysons.gif'
 import autotraders from '../../../../public/projects/autotraders.gif'
 import autotradersdash from '../../../../public/projects/autosportsdash.jpg'
@@ -21,14 +19,6 @@ export const projectData = [
     alt: "SmartPlus Cargo website by Lazim MV, logistics project by Lazim Latheef",
   },
   {
-    name: "iGreenie",
-    link: "https://igreenie.vercel.app/",
-    description: "Green energy, and smart security solutions.",
-    image: "https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg",
-    webImage: igreenie1,
-    alt: "iGreenie solar and security products site developed by Lazim MV, green project by Lazim Latheef",
-  },
-  {
     name: "Nexwave",
     link: "https://www.nexwavedigital.com/",
     description: "Creative digital agency site.",
@@ -37,12 +27,36 @@ export const projectData = [
     alt: "Nexwave digital agency project by Lazim, web design by Lazim MV",
   },
   {
+    name: "Mavrriq",
+    link: "https://www.mavrriq.com/",
+    description: "Consulting across Saudi, UAE, India & more.",
+    image: "https://images.pexels.com/photos/3560168/pexels-photo-3560168.jpeg",
+    webImage: maveriq,
+    alt: "Mavrriq consulting site by Lazim MV, Lazim Latheef portfolio work",
+  },
+  {
+    name: "iGreenie",
+    link: "https://igreenie.vercel.app/",
+    description: "Green energy, and smart security solutions.",
+    image: "https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg",
+    webImage: igreenie1,
+    alt: "iGreenie solar and security products site developed by Lazim MV, green project by Lazim Latheef",
+  },
+  {
     name: "Motobike",
     link: "https://client-bikes.vercel.app/",
     description: "Book and explore premium bikes.",
     image: "https://images.pexels.com/photos/2739013/pexels-photo-2739013.jpeg",
     webImage: motobike1,
     alt: "Motobike booking site built by Lazim Latheef, bike project by Lazim MV",
+  },
+  {
+    name: "Brightline",
+    link: "https://bright-line.vercel.app/",
+    description: "Education School",
+    image: "https://images.pexels.com/photos/5705494/pexels-photo-5705494.jpeg?auto=compress&cs=tinysrgb&w=800&h=600",
+    webImage: brightLine,
+    alt: "brightline school site by Lazim MV, Lazim Latheef web developer",
   },
   {
     name: "Pullys",
@@ -68,13 +82,6 @@ export const projectData = [
     webImage: autotraders,
     alt: "AutoTraders used car platform by Lazim Latheef, car website by Lazim MV",
   },
-  {
-    name: "Mavrriq",
-    link: "https://www.mavrriq.com/",
-    description: "Consulting across Saudi, UAE, India & more.",
-    image: "https://images.pexels.com/photos/3560168/pexels-photo-3560168.jpeg",
-    webImage: maveriq,
-    alt: "Mavrriq consulting site by Lazim MV, Lazim Latheef portfolio work",
-  },
+
 ];
 
