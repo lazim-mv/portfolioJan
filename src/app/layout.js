@@ -83,11 +83,11 @@ export default function RootLayout({ children }) {
 
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
           <>
-            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+            {/* <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} /> */}
             {/* <EnhancedReferrerTracker /> */}
           </>
         )}
-        <script
+        {/* <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
@@ -103,7 +103,7 @@ export default function RootLayout({ children }) {
               ],
             }),
           }}
-        />
+        /> */}
       </head>
       <body
         className={`antialiased ${manrope.variable} ${notoSerif.variable}`}

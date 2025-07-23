@@ -4,6 +4,7 @@ import { useGSAP } from '@gsap/react'
 import gsap from '@/app/utils/gsapInit'
 import { SplitText } from '@/app/utils/gsapInit'
 import { ScrollTrigger } from '@/app/utils/gsapInit'
+import TechLogos from '../techLogos/TechLogos'
 
 const Services = ({ isMobile, hasMounted }) => {
     const section1Ref = useRef(null)
@@ -219,6 +220,8 @@ const Services = ({ isMobile, hasMounted }) => {
                     marginBottom: 'max(1.5vw, 16px)',
                 }}
             ></div>
+
+            <TechLogos />
 
             <section
                 ref={section2Ref}

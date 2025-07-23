@@ -11,6 +11,7 @@ import Projects from "./components/projects/Projects";
 import Testimonials from "./components/testimonials/Testimonials";
 import Footer from "./components/footer/Footer";
 import Services from "./components/services/Services";
+import TechLogos from "./components/techLogos/TechLogos";
 // import ReferrerTracker from "./components/ReferrerTracker";
 
 
@@ -219,10 +220,13 @@ export default function Home() {
         </section>
       </div>
 
+
+
       <section
         id="services"
       >
         <Services isMobile={isMobile} hasMounted={hasMounted} />
+
       </section>
 
       <section
