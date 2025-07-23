@@ -81,12 +81,12 @@ export default function RootLayout({ children }) {
           }}
         /> */}
 
-        {/* {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && ( */}
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
           <>
             {/* <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} /> */}
             {/* <EnhancedReferrerTracker /> */}
           </>
-        {/* )} */}
+        )}
         {/* <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
